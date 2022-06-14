@@ -1,8 +1,7 @@
 #!/bin/sh
 
-# This is a very simple script used to demo installing
-# NixOS on a virtual machine.
-# It uses a BIOS/GRUB install, no swap space.
+# This simple script is used to demo installing NixOS on a virtual machine.
+# It uses a BIOS/GRUB install with no swap partition.
 # Run it as root on the VM.
 
 create_partitions () {
@@ -16,7 +15,6 @@ create_and_mount_file_system () {
   mount /dev/disk/by-label/nixos /mnt
 }
 
-# Set nixos configuration
 configure_nixos () {
   nixos-generate-config --root /mnt
   cp ./configuration.nix /mnt/etc/nixos/configuration.nix
