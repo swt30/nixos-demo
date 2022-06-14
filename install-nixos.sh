@@ -12,6 +12,7 @@ create_partitions () {
 
 create_and_mount_file_system () {
   mkfs.ext4 -L nixos /dev/sda1
+  sleep 3
   mount /dev/disk/by-label/nixos /mnt
 }
 
