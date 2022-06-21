@@ -19,11 +19,11 @@ create_and_mount_file_system () {
 
 configure_nixos () {
   nixos-generate-config --root /mnt
-  cp ./configuration.nix /mnt/etc/nixos/configuration.nix
+  cp ./flake.nix /mnt/etc/nixos/
 }
 
 install_nixos () {
-  nixos-install --no-root-password
+  nixos-install --no-root-password --flake /mnt/etc/nixos#nixos
 }
 
 create_partitions
