@@ -6,13 +6,15 @@
 # You might have to change the drive below - for example, using qemu on mac,
 # the disk is called /dev/sda, but under gnome-boxes on linux it is /dev/vda.
 
+device="/dev/sda"  # if changing, also change bootloader in flake.nix
+
 create_partitions () {
-  parted /dev/sda -- mklabel msdos
-  parted /dev/sda -- mkpart primary 1MiB 100%
+  parted $device -- mklabel msdos
+  parted $device -- mkpart primary 1MiB 100%
 }
 
 create_and_mount_file_system () {
-  mkfs.ext4 -L nixos /dev/sda1
+  mkfs.ext4 -L nixos "${device}1"
   sleep 3
   mount /dev/disk/by-label/nixos /mnt
 }
