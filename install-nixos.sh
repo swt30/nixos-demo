@@ -6,6 +6,8 @@
 # You might have to change the drive below - for example, using qemu on mac,
 # the disk is called /dev/sda, but under gnome-boxes on linux it is /dev/vda.
 
+set -euxo pipefail
+
 device="/dev/sda"  # if changing, also change bootloader in flake.nix
 
 create_partitions () {
@@ -15,7 +17,10 @@ create_partitions () {
 
 create_and_mount_file_system () {
   mkfs.ext4 -L nixos "${device}1"
-  sleep 3
+  # ensure that the label is ready before continuing
+  udevadm control --reload-rules
+  udevadm trigger
+  udevadm settle
   mount /dev/disk/by-label/nixos /mnt
 }
 
