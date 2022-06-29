@@ -1,7 +1,7 @@
 {
   description = "A barebones flake for a NixOS installation demo";
 
-  inputs.nixpkgs.url = nixpkgs/nixos-22.05;
+  inputs.nixpkgs.url = "nixpkgs/nixos-22.05";
 
   outputs = { self, nixpkgs }: let
     system-config = { pkgs, ... }: {
