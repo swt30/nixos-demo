@@ -9,19 +9,14 @@
       boot.loader.grub.version = 2;
       boot.loader.grub.device = "/dev/sda";
 
-      networking.hostName = "nixos";
-
-      time.timeZone = "Europe/London";
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      environment.systemPackages = [ pkgs.nano ];
 
       users.users.nix = {
         password = "nix";
         isNormalUser = true;
         extraGroups = [ "wheel" ];
       };
-
-      environment.systemPackages = [ pkgs.nano ];
-
-      system.stateVersion = "22.05";
     }; in {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
